@@ -681,14 +681,14 @@ class Bot
       @plugins.delegate "motd", m
     }
     @client[:nicktaken] = proc { |data|
-      new = "#{data[:nick]}_"
-      nickchg new
+      new_nick = "#{data[:nick]}_"
+      nickchg new_nick
       # If we're setting our nick at connection because our choice was taken,
       # we have to fix our nick manually, because there will be no NICK message
       # to inform us that our nick has been changed.
       if data[:target] == '*'
-        debug "setting my connection nick to #{new}"
-        nick = new
+        debug "setting my connection nick to #{new_nick}"
+        nick = new_nick
       end
       @plugins.delegate "nicktaken", data[:nick]
     }
