@@ -258,7 +258,7 @@ module Irc
 
     def BasicUserMessage.strip_initial_formatting(string)
       return "" unless string
-      ret = string.gsub(/^#{FormattingRx}|#{FormattingRx}$/,"")
+      return string.gsub(/^#{FormattingRx}|#{FormattingRx}$/,"")
     end
 
     def BasicUserMessage.strip_formatting(string)

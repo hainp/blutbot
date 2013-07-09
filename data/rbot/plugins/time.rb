@@ -38,12 +38,12 @@ class TimePlugin < Plugin
   end
 
   def getTime(m, zone )
-    if zone.length == 2 then #country code
+    if zone.length == 2 #country code
       zone.upcase!
       zone = 'GB' if zone == 'UK' #country doesn't know its own name
       begin
         nationZones = TZInfo::Country.get(zone).zone_identifiers
-        if nationZones.size == 1 then
+        if nationZones.size == 1
           zone = nationZones[0]
         else
           m.reply "#{zone} has the cities of #{nationZones.join( ', ' )}."
@@ -104,7 +104,7 @@ class TimePlugin < Plugin
   end
 
   def setUserZone( m, params )
-    if params[:where].size > 0 then
+    if params[:where].size > 0
       s = setZone( m, m.sourcenick, params[:where].join('_') )
     else
       m.reply "Requires <Continent>/<City> or country code"
@@ -116,7 +116,7 @@ class TimePlugin < Plugin
   end
 
   def setAdminZone( m, params )
-    if params[:who] and params[:where].size > 0 then
+    if params[:who] and params[:where].size > 0
       s = setZone( m, params[:who], params[:where].join('_') )
     else
       m.reply "Requires a nick and the <Continent>/<City> or country code"

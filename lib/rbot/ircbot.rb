@@ -688,9 +688,9 @@ class Bot
       # to inform us that our nick has been changed.
       if data[:target] == '*'
         debug "setting my connection nick to #{new_nick}"
-        nick = new_nick
       end
       @plugins.delegate "nicktaken", data[:nick]
+      return new_nick
     }
     @client[:badnick] = proc {|data|
       warning "bad nick (#{data[:nick]})"

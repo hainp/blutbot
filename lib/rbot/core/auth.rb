@@ -148,7 +148,7 @@ class AuthModule < CoreBotModule
           end
         }
       }
-    rescue => e
+    rescue
       m.reply "something went wrong while trying to set the permissions"
       raise
     end
@@ -484,7 +484,7 @@ class AuthModule < CoreBotModule
     can_set = [:password]
     can_addrm = [:netmasks]
     can_reset = bools + can_set + can_addrm
-    can_show = can_reset + ["perms"]
+    # can_show = can_reset + ["perms"]
 
     begin
     case cmd.to_sym

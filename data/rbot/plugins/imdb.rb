@@ -34,7 +34,7 @@ class Imdb
 
   def search(rawstr, rawopts={})
     # allow the user to search directly for (movie) IDs
-    if rawstr.match /$tt\d+^/ then
+    if rawstr.match(/$tt\d+^/)
       return ["/movie/#{rawstr}/"]
     end
     str = CGI.escape(rawstr)
@@ -150,7 +150,8 @@ class Imdb
       debug title_date
       # note that the date dash for series is a - (ndash), not a - (minus sign)
       # also, the second date, if missing, is an no-break space
-      pre_title, extra, date, junk = title_date.scan(/^(.*)\((.+?\s+)?(\d\d\d\d(?:–(?:\d\d\d\d| )?)?(?:\/[IV]+)?)\)\s*(.+)?$/).first
+      # pre_title, extra, date, junk = title_date.scan(/^(.*)\((.+?\s+)?(\d\d\d\d(?:–(?:\d\d\d\d| )?)?(?:\/[IV]+)?)\)\s*(.+)?$/).first
+      pre_title, extra, date = title_date.scan(/^(.*)\((.+?\s+)?(\d\d\d\d(?:–(?:\d\d\d\d| )?)?(?:\/[IV]+)?)\)\s*(.+)?$/).first
       extra.strip! if extra
       pre_title.strip!
       title = fix_article(pre_title)

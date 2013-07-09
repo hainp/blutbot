@@ -97,7 +97,7 @@ class ForecastPlugin < Plugin
             @registry[m.sourcenick] = loc
             get_forecast(m,loc)
         else
-            if @registry.has_key?(m.sourcenick) then
+            if @registry.has_key?(m.sourcenick)
                 loc = @registry[m.sourcenick]
                 get_forecast(m,loc)
             else

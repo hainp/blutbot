@@ -32,7 +32,7 @@ class VanDalePlugin < Plugin
 				i = i+1
 			end
 		end
-		if ret.length != 0 then
+		if ret.length != 0
 			m.reply "zie ook " + ret.join(", ")
 		end
 		return

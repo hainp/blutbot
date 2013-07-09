@@ -56,7 +56,7 @@ class DicePlugin < Plugin
     unless dice[0] =~ /^\d+/
       dice[0] = 1
     end
-    for i in 0...dice[0].to_i
+    dice[0].to_i.times do
       tmp = rand(dice[1].to_i) + 1
       repr << tmp.to_s
       r = r + tmp

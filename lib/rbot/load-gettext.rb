@@ -99,7 +99,6 @@ end
       #   * :with_paths - show the load paths for mo-files.
       def current_textdomain_info(options = {})
         opts = {:with_messages => false, :with_paths => false, :out => STDOUT}.merge(options)
-        ret = nil
         # this is for 2.1.0
         TextDomainManager.each_textdomains(self) {|textdomain, lang|
           opts[:out].puts "TextDomain name: #{textdomain.name.inspect}"

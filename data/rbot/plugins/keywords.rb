@@ -437,10 +437,10 @@ class Keywords < Plugin
           return
         end
         i = 1
-        matches.each {|rkw|
-          m.reply "[#{i}/#{matches.length}] #{rkw[0]} #{rkw[1].type} #{rkw[1].desc}" if i >= from
+        matches.each { |rkeyword|
+          m.reply "[#{i}/#{matches.length}] #{rkeyword[0]} #{rkeyword[1].type} #{rkeyword[1].desc}" if i >= from
           i += 1
-          break if i == from+@bot.config['keyword.search_results']
+          break if i == from + @bot.config['keyword.search_results']
         }
       else
         m.reply "no keywords match #{key}"

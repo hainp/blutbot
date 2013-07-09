@@ -769,9 +769,9 @@ module Irc
     def replace(other)
       case other
       when Netmask
-        nick = other.nick
-        user = other.user
-        host = other.host
+        # nick = other.nick
+        # user = other.user
+        # host = other.host
         @server = other.server
         @casemap = other.casemap unless @server
       else

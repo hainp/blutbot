@@ -38,7 +38,7 @@ class BasicsModule < CoreBotModule
   end
 
   def ctcp_listen(m)
-    who = m.private? ? "me" : m.target
+    # who = m.private? ? "me" : m.target
     case m.ctcp.intern
     when :PING
       m.ctcp_reply m.message

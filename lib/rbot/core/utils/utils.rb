@@ -228,7 +228,7 @@ module ::Irc
     # :date_format, used with <tt>to_formatted_s<tt>, default to :default
     def Utils.timeago(time, options = {})
       start_date = options.delete(:start_date) || Time.new
-      date_format = options.delete(:date_format) || "%x"
+      # date_format = options.delete(:date_format) || "%x"
       delta = (start_date - time).round
       if delta.abs < 2
         _("right now")
@@ -307,7 +307,7 @@ module ::Irc
           begin
             $stderr.reopen($stdout)
             exec(command, *args)
-          rescue Exception => e
+          rescue Exception
             Kernel::exit! 1
           end
           Kernel::exit! 1

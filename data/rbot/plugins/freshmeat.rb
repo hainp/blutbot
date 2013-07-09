@@ -82,7 +82,7 @@ class FreshmeatPlugin < Plugin
       return
     end
     matches = Array.new
-    max_width = 250
+    # max_width = 250
     title_width = 0
     url_width = 0
     done = 0
@@ -148,7 +148,7 @@ class FreshmeatPlugin < Plugin
     end
 
     matches = Array.new
-    max_width = 60
+    # max_width = 60
     title_width = 0
     done = 0
     doc.elements.each("feed/entry") {|e|
@@ -229,7 +229,7 @@ class FreshmeatPlugin < Plugin
       timeago = mat[1]
       desc = mat[2]
       url = mat[3]
-      changelog = mat[4]
+      # changelog = mat[4]
       reply = sprintf("%s | %s | %s | %s",
         timeago.rjust(time_width),
         title.ljust(title_width),

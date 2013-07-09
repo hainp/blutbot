@@ -204,7 +204,7 @@ class ConfigModule < CoreBotModule
   end
 
   def ctcp_listen(m)
-    who = m.private? ? "me" : m.target
+    # who = m.private? ? "me" : m.target
     case m.ctcp.intern
     when :VERSION
       m.ctcp_reply version_string

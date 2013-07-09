@@ -281,7 +281,7 @@ class LastFmPlugin < Plugin
       return
     end
     if xml.class == Net::HTTPBadRequest
-      if doc.root.elements["error"].attributes["code"] == "7" then
+      if doc.root.elements["error"].attributes["code"] == "7"
         error = doc.root.elements["error"].text
         error.match(/Invalid username: \[(.*)\]/);
         baduser = $1
@@ -336,7 +336,7 @@ class LastFmPlugin < Plugin
       return
     end
     if xml.class == Net::HTTPBadRequest
-      if doc.root.elements["error"].attributes["code"] == "6" then
+      if doc.root.elements["error"].attributes["code"] == "6"
         m.reply _("%{user} doesn't exist on last.fm, perhaps they need to: %{prefix}lastfm set user <username>") % {
           :user => user,
           :prefix => @bot.config['core.address_prefix'].first

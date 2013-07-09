@@ -60,9 +60,9 @@ private
     def heat_index_or_wind_chill(cc)
         hi = cc[:heat_index_string]
         wc = cc[:windchill_string]
-        if hi and hi != 'NA' then
+        if hi and hi != 'NA'
             _(" with a heat index of %{hi}") % { :hi => hi }
-        elsif wc and wc != 'NA' then
+        elsif wc and wc != 'NA'
             _(" with a windchill of %{wc}") % { :wc => wc }
         else
             ""
@@ -158,7 +158,7 @@ class WeatherPlugin < Plugin
   end
 
   def nws_describe(m, where)
-    if @nws_cache.has_key?(where) then
+    if @nws_cache.has_key?(where)
         met = @nws_cache[where]
     else
         met = CurrentConditions.new(where)

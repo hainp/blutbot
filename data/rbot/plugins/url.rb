@@ -1,7 +1,9 @@
 #-- vim:sw=2:et
 #++
 #
-# :title: Url plugin
+# :title: URL plugin
+
+require 'cgi'
 
 define_structure :Url, :channel, :nick, :time, :url, :info
 
@@ -233,7 +235,7 @@ class UrlPlugin < Plugin
   def message(m)
     return if m.address?
 
-    escaped = URI.escape(m.message, OUR_UNSAFE)
+    escaped = CGI.escape(m.message, OUR_UNSAFE)
     urls = URI.extract(escaped, ['http', 'https'])
     return if urls.empty?
     Thread.new { handle_urls(m, :urls => urls) }

@@ -341,7 +341,7 @@ class HttpUtil
     list = [uri.host]
     begin
       list.concat Resolv.getaddresses(uri.host)
-    rescue StandardError => err
+    rescue StandardError
       warning "couldn't resolve host uri.host"
     end
 

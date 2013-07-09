@@ -21,7 +21,7 @@ class ::String
     debug "cmd: #{cmd}, pars: #{pars.inspect}"
     case cmd.to_sym
     when :KICK
-      chan, nick, msg = pars.split
+      chan, nick = pars.split
       chan = chan.split(',')
       nick = nick.split(',')
       penalty += nick.size
@@ -305,20 +305,20 @@ module Irc
       @server_uri.port = 6667 if !@server_uri.port
       debug "connection attempt \##{@conn_count} (#{@server_uri.host}:#{@server_uri.port})"
 
-      if(@host)
+      if @host
         begin
           sock=TCPSocket.new(@server_uri.host, @server_uri.port, @host)
-        rescue ArgumentError => e
+        rescue ArgumentError
           error "Your version of ruby does not support binding to a "
           error "specific local address, please upgrade if you wish "
           error "to use HOST = foo"
           error "(this option has been disabled in order to continue)"
-          sock=TCPSocket.new(@server_uri.host, @server_uri.port)
+          sock = TCPSocket.new(@server_uri.host, @server_uri.port)
         end
       else
-        sock=TCPSocket.new(@server_uri.host, @server_uri.port)
+        sock = TCPSocket.new(@server_uri.host, @server_uri.port)
       end
-      if(@ssl)
+      if @ssl
         require 'openssl'
         ssl_context = OpenSSL::SSL::SSLContext.new()
         ssl_context.verify_mode = OpenSSL::SSL::VERIFY_NONE

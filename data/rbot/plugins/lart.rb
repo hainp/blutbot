@@ -177,7 +177,8 @@ class LartPlugin < Plugin
   end
 
   def get_msg_idx(max)
-    idx = rand(max)
+    # idx = rand(max)
+    return rand(max)
   end
 
 end

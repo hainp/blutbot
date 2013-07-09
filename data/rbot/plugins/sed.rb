@@ -34,7 +34,7 @@ class Sed < Plugin
     end
     oldstring = @amendlog[channel][source] 
     newstring = oldstring
-    if m.message.match(/^s([\/|,!])(.*?)\1(.*?)\1(g?)/) then
+    if m.message.match(/^s([\/|,!])(.*?)\1(.*?)\1(g?)/)
       target = Regexp.new($2)
       replace_with = $3
       global = $4

@@ -1241,7 +1241,7 @@ module Irc
         when RPL_MOTDSTART
           # "<nick> :- <server> Message of the Day -"
           if argv[1] =~ /^-\s+(\S+)\s/
-            server = $1
+            # server = $1
           else
             warning "Server doesn't have an RFC compliant MOTD start."
           end

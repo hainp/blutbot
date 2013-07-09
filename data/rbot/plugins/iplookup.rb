@@ -139,7 +139,7 @@ module ArinWhois
       end
       datas_with_bitmasks.compact!
       #datas_with_bitmasks.sort.each{|x|puts x[0]}
-      winner = datas_with_bitmasks.sort[-1][1]
+      # winner = datas_with_bitmasks.sort[-1][1]
     end
 
   end # of class ArinWhoisParser
