@@ -44,7 +44,7 @@ class MathPlugin < Plugin
     # a .<digits> and insert a 0 before the .
     expr.gsub!(/(\D|^)(\.\d+)/,'\10\2')
 
-    while expr =~ /(exp ([\w\d]+))/
+    while expr =~ /(exp ([\w]+))/
       exp = $1
       val = Math.exp($2).to_s
       expr.gsub!(/#{Regexp.escape exp}/, "+#{val}")
