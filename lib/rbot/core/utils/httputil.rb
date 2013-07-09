@@ -84,6 +84,7 @@ module ::Net
             return Iconv.iconv('utf-8//ignore',
                                charset,
                                str.slice(0 .. (-1 - off))).first
+            # return str.slice(0 .. (-1 - off))).force_encoding "UTF-8"
           rescue
             debug "conversion failed for #{charset} / offset #{off}"
           end
