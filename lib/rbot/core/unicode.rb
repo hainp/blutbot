@@ -36,8 +36,6 @@ class UnicodePlugin < CoreBotModule
             @iencs = iencs.dup
             @iconvs = @iencs.map { |_| Iconv.new('utf-8', _) }
             debug "*** o = #{o}, i = #{i}, iencs = #{iencs.inspect}"
-            @default_in = Iconv.new('utf-8//ignore', i)
-            @default_out = Iconv.new(o, 'utf-8//ignore')
         end
 
         def in(data)
@@ -51,13 +49,15 @@ class UnicodePlugin < CoreBotModule
                 end
             }
 
-            rv = @default_in.iconv(data) if !rv
+            rv = data.force_encoding('UTF-8') if !rv
+            # rv = @default_in.iconv(data) if !rv
             debug ">> #{rv.inspect}"
             return rv
         end
 
         def out(data)
-            rv = @default_out.iconv(data) rescue data # XXX: yeah, i know :/
+            rv = data.force_encoding('UTF-8')
+            # rv = @default_out.iconv(data) rescue data # XXX: yeah, i know :/
             debug "<< #{rv}"
             rv
         end
