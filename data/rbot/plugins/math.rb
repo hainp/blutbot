@@ -99,7 +99,8 @@ class MathPlugin < Plugin
     expr.gsub!(/(plus|and)/, "+")
 
     debug expr
-    if (expr =~ /^\s*[-\d*+\s()\/^\.\|\&\*\!]+\s*$/ &&
+    # if (expr =~ /^\s*[-\d*+\s()\/^\.\|\&\*\!]+\s*$/ &&
+    if (expr =~ /^\s*[-\d+\s()\/^\.\|\&\*\!]+\s*$/ &&
        expr !~ /^\s*\(?\d+\.?\d*\)?\s*$/ &&
        expr !~ /^\s*$/ &&
        expr !~ /^\s*[( )]+\s*$/)
