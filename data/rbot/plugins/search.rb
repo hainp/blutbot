@@ -515,4 +515,5 @@ plugin.map "gtime *words", :action => 'gtime', :threaded => true
 plugin.map "wa *words", :action => 'wolfram', :threaded => true
 plugin.map "wp :lang *words", :action => 'wikipedia', :requirements => { :lang => /^\w\w\w?$/ }, :threaded => true
 plugin.map "wp *words", :action => 'wikipedia', :threaded => true
+plugin.map "wiki *words", :action => 'wikipedia', :threaded => true
 plugin.map "unpedia *words", :action => 'unpedia', :threaded => true

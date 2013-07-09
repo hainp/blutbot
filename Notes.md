@@ -2,7 +2,7 @@ My own (cmpitg) notes.
 
 ## Requirements
 
-* Gems: `gettext`
+* Gems: `gettext`, `htmlentities`
 
 ### For Tokyo Cabinet
 
