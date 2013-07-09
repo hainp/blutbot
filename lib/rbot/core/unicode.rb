@@ -85,7 +85,6 @@ class UnicodePlugin < CoreBotModule
         charsets = bot.config['encoding.charsets']
         charsets = ['utf-8'] if charsets.empty?
         bot.socket.filter = UnicodeFilter.new(charsets[0], *charsets)
-        $KCODE = 'u'
     end
 end
 
