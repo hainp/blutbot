@@ -543,11 +543,11 @@ class Bot
       rx = Regexp.escape(str)
       # debug "Escaped: #{rx.inspect}"
       rx.gsub!(/((?:\\ )*)(:|\\\*)(\w+)/) { |m|
-        # whites = $1
+        whites = $1
         is_single = $2 == ":"
         name = $3.intern
 
-        # not_needed = @defaults.has_key?(name)
+        not_needed = @defaults.has_key?(name)
 
         has_req = @requirements[name]
         debug "Requirements for #{name}: #{has_req.inspect}"
@@ -568,7 +568,7 @@ class Bot
           sub = Regexp.escape(has_req.to_s) rescue "\\S+"
         end
         debug "Regexp for #{name}: #{sub.inspect}"
-        # s = "#{not_needed ? "(?:" : ""}#{whites}(#{sub})#{ not_needed ? ")?" : ""}"
+        s = "#{not_needed ? "(?:" : ""}#{whites}(#{sub})#{ not_needed ? ")?" : ""}"
       }
       # debug "Replaced dyns: #{rx.inspect}"
       rx.gsub!(/((?:\\ )*)((?:\\\[)+)/, '\2\1')
@@ -589,6 +589,8 @@ class Bot
       debug "Testing #{m.message.inspect} against #{self.inspect}"
 
       matching = @regexp.match(m.message)
+      # STDERR.puts "[message] #{m.message} [regex] #{@regexp} [match] #{matching}"
+
       return MessageMapper::NoMatchFailure.new(self, m) unless matching
       return MessageMapper::PartialMatchFailure.new(self, m) unless matching[0] == m.message
 

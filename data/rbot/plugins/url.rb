@@ -236,6 +236,7 @@ class UrlPlugin < Plugin
     return if m.address?
 
     escaped = CGI.escape(m.message, OUR_UNSAFE)
+    # escaped = URI.escape(m.message, OUR_UNSAFE)
     urls = URI.extract(escaped, ['http', 'https'])
     return if urls.empty?
     Thread.new { handle_urls(m, :urls => urls) }
