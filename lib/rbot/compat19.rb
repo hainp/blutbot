@@ -8,7 +8,7 @@ require "thread"
 
 class ConditionVariable
 
-  def wait(mutex, timeout=nil)
+  def wait_mutex(mutex, timeout=nil)
     begin
       # TODO: mutex should not be used
       @waiters_mutex.synchronize do
@@ -43,7 +43,7 @@ module MonitorMixin
       @monitor.__send__(:mon_check_owner)
       count = @monitor.__send__(:mon_exit_for_cond)
       begin
-        @cond.wait(@monitor.instance_variable_get("@mon_mutex"), timeout)
+        @cond.wait_mutex(@monitor.instance_variable_get("@mon_mutex"), timeout)
         return true
       rescue TimeoutError
         return false
