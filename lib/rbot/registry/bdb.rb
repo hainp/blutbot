@@ -3,6 +3,8 @@
 #
 # :title: Berkeley DB interface
 
+RBOT_DB_NAME = "rbot"
+
 begin
   require 'bdb'
 rescue LoadError
@@ -137,12 +139,14 @@ module Irc
 
     def DBTree.create_db(name)
       debug "DBTree: creating empty db #{name}"
-      return @@env.open_db(BDB::CIBtree, name, nil, BDB::CREATE | BDB::EXCL, 0600)
+      return @@env.open_db(BDB::CIBtree, name, RBOT_DB_NAME, BDB::CREATE | BDB::EXCL, 0600)
     end
 
     def DBTree.open_db(name)
       debug "DBTree: opening existing db #{name}"
-      return @@env.open_db(BDB::CIBtree, name, nil, "r+", 0600)
+      STDERR.puts ">>> Opening #{name}, #{RBOT_DB_NAME}"
+      #return @@env.open_db(BDB::CIBtree, name, RBOT_DB_NAME, "r+", 0600)
+      return @@env.open_db(BDB::CIBtree, name, RBOT_DB_NAME, "a+", 0600)
     end
 
     def DBTree.cleanup_logs()
