@@ -221,7 +221,7 @@ class RoulettePlugin < Plugin
 
   # Figure out who the winnar is!
   def hof(m, params)
-    fool = m.sourcenick
+    # fool = m.sourcenick
     tmpKey = params[:key].to_s
     targetKey = tmpKey.to_sym
     m.reply("Checking out the #{tmpKey} HoF...")

@@ -184,7 +184,8 @@ class QuotePlugin < Plugin
   def cmd_getquote(m, p)
     channel = p[:channel] || m.channel.to_s
     num = p[:num] ? p[:num].to_i : nil
-    quote, total = getquote(m.source, channel, num)
+    # quote, total = getquote(m.source, channel, num)
+    quote, = getquote(m.source, channel, num)
     if quote
       m.reply _("[%{num}] %{quote}") % {
         :num => quote.num,
@@ -198,7 +199,8 @@ class QuotePlugin < Plugin
   def cmd_whoquote(m, p)
     channel = p[:channel] || m.channel.to_s
     num = p[:num] ? p[:num].to_i : nil
-    quote, total = getquote(m.source, channel, num)
+    # quote, total = getquote(m.source, channel, num)
+    quote, = getquote(m.source, channel, num)
     if quote
       m.reply _("quote %{num} added by %{source}") % {
         :num => quote.num,
@@ -212,7 +214,8 @@ class QuotePlugin < Plugin
   def cmd_whenquote(m, p)
     channel = p[:channel] || m.channel.to_s
     num = p[:num] ? p[:num].to_i : nil
-    quote, total = getquote(m.source, channel, num)
+    # quote, total = getquote(m.source, channel, num)
+    quote, = getquote(m.source, channel, num)
     if quote
       m.reply _("quote %{num} added on %{date}") % {
         :num => quote.num,
@@ -226,7 +229,8 @@ class QuotePlugin < Plugin
   def cmd_searchquote(m, p)
     channel = p[:channel] || m.channel.to_s
     reg = p[:reg].to_s
-    quote, total = searchquote(m.source, channel, reg)
+    quote, = searchquote(m.source, channel, reg)
+    # quote, total = searchquote(m.source, channel, reg)
     if quote
       m.reply _("[%{num}] %{quote}") % {
         :num => quote.num,
@@ -268,7 +272,8 @@ class QuotePlugin < Plugin
   def cmd_topicquote(m, p)
     channel = p[:channel] || m.channel.to_s
     num = p[:num] ? p[:num].to_i : nil
-    quote, total = getquote(m.source, channel, num)
+    quote, = getquote(m.source, channel, num)
+    # quote, total = getquote(m.source, channel, num)
     if quote
       @bot.topic channel, _("[%{num}] %{quote}") % {
         :num => quote.num,
@@ -281,7 +286,8 @@ class QuotePlugin < Plugin
 
   def cmd_lastquote(m, p)
     channel = p[:channel] || m.channel.to_s
-    quote, total = getquote(m.source, channel, lastquote(channel))
+    quote, = getquote(m.source, channel, lastquote(channel))
+    # quote, total = getquote(m.source, channel, lastquote(channel))
     if quote
       m.reply _("[%{num}] %{quote}") % {
         :num => quote.num,

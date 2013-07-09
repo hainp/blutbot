@@ -86,7 +86,7 @@ class SearchPlugin < Plugin
     begin
       feed = @bot.httputil.get(url)
       raise unless feed
-    rescue => e
+    rescue
       m.reply "error duckduckgoing for #{what}"
       return
     end
@@ -204,7 +204,7 @@ class SearchPlugin < Plugin
     end
     # It is also possible to choose a filter to remove constant parts from the titles
     # e.g.: "Wikipedia, the free encyclopedia" when doing Wikipedia searches
-    filter = params[:filter] || ""
+    # filter = params[:filter] || ""
 
     url = GOOGLE_WAP_SEARCH + site + searchfor
 
@@ -306,7 +306,7 @@ class SearchPlugin < Plugin
       return
     end
 
-    related = wml[related_index...defs_index]
+    # related = wml[related_index...defs_index]
     defs = wml[defs_index...defs_end]
 
     m.reply defs.ircify_html(:a_href => Underline), :split_at => (Underline + ' ')
@@ -327,7 +327,7 @@ class SearchPlugin < Plugin
 
     begin
       html = @bot.httputil.get(url)
-    rescue => e
+    rescue
       m.reply "error googlecalcing #{what}"
       return
     end
@@ -357,7 +357,7 @@ class SearchPlugin < Plugin
 
     begin
       html = @bot.httputil.get(url)
-    rescue => e
+    rescue
       m.reply "error googlecounting #{what}"
       return
     end
@@ -387,7 +387,7 @@ class SearchPlugin < Plugin
 
     begin
       html = @bot.httputil.get(url)
-    rescue => e
+    rescue
       m.reply "error googledefining #{what}"
       return
     end
@@ -416,7 +416,7 @@ class SearchPlugin < Plugin
     begin
       feed = @bot.httputil.get(url)
       raise unless feed
-    rescue => e
+    rescue
       m.reply "error asking WolframAlfa about #{what}"
       return
     end
@@ -483,7 +483,7 @@ class SearchPlugin < Plugin
 
     begin
       html = @bot.httputil.get(url)
-    rescue => e
+    rescue
       m.reply "Error googletiming #{where}"
       return
     end

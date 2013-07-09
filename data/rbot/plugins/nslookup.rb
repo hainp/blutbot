@@ -19,7 +19,7 @@ class DnsPlugin < Plugin
       else
         m.reply "#{params[:host]}: not found"
       end
-    rescue StandardError => err
+    rescue StandardError
       m.reply "#{params[:host]}: not found"
     end
   end
@@ -28,7 +28,7 @@ class DnsPlugin < Plugin
     begin
       a = gethostname(params[:ip])
       m.reply m.params + ": " + a if a
-    rescue StandardError => err
+    rescue StandardError
       m.reply "#{params[:ip]}: not found (does not reverse resolve)"
     end
   end

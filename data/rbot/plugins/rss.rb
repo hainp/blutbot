@@ -885,7 +885,8 @@ class RSSFeedsPlugin < Plugin
     handle = params[:handle]
     chan = params[:chan] || m.replyto
     url = params[:url]
-    type = params[:type]
+    # type = params[:type]
+    @type = params[:type]
     if url
       add_rss(m, params)
     end
@@ -1164,8 +1165,8 @@ class RSSFeedsPlugin < Plugin
     author = item.dc_creator! || item.author!
     author.strip! if author
 
-    line1 = nil
-    line2 = nil
+    # line1 = nil
+    # line2 = nil
 
     at = ((item.title && item.link) ? ' @ ' : '')
 

@@ -1088,7 +1088,7 @@ class UnoPlugin < Plugin
   end
 
   def do_end_game(channel, closure)
-    reg = chan_reg(channel)
+    # reg = chan_reg(channel)
     stats = chan_stats(channel)
     stats['played'] += 1
     stats['played_runtime'] += closure[:runtime]

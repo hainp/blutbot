@@ -37,7 +37,7 @@ class TimePlugin < Plugin
     end
   end
 
-  def getTime(m, zone )
+  def getTime(m, zone)
     if zone.length == 2 #country code
       zone.upcase!
       zone = 'GB' if zone == 'UK' #country doesn't know its own name
@@ -46,7 +46,7 @@ class TimePlugin < Plugin
         if nationZones.size == 1
           zone = nationZones[0]
         else
-          m.reply "#{zone} has the cities of #{nationZones.join( ', ' )}."
+          m.reply "#{zone} has the cities of #{nationZones.join(', ')}."
         end
       rescue TZInfo::InvalidCountryCode
         m.reply "#{zone} is not a valid country code."
@@ -58,11 +58,11 @@ class TimePlugin < Plugin
             s[0] = s[0,1].upcase
             s[1, s.length] = s[1, s.length].downcase if sp == '/'
             arr.push(s) }
-            zone = arr.join( sp )
+            zone = arr.join(sp)
         }
 
-    tz = TZInfo::Timezone.get( zone )
-    "#{tz.friendly_identifier} - #{tz.now.strftime( '%a %b %d %H:%M' )} #{tz.current_period.abbreviation}"
+    tz = TZInfo::Timezone.get(zone)
+    "#{tz.friendly_identifier} - #{tz.now.strftime('%a %b %d %H:%M')} #{tz.current_period.abbreviation}"
   end
 
   def showTime(m, params)
@@ -97,43 +97,47 @@ class TimePlugin < Plugin
     end
 
     begin
-      m.reply getTime( m,  zone )
+      m.reply getTime(m, zone)
     rescue TZInfo::InvalidTimezoneIdentifier
       parse(m, params)
     end
   end
 
-  def setUserZone( m, params )
+  def setUserZone(m, params)
     if params[:where].size > 0
-      s = setZone( m, m.sourcenick, params[:where].join('_') )
+      # s = setZone(m, m.sourcenick, params[:where].join('_'))
+      setZone(m, m.sourcenick, params[:where].join('_'))
     else
       m.reply "Requires <Continent>/<City> or country code"
     end
   end
 
-  def resetUserZone( m, params )
-    s = resetZone( m, m.sourcenick)
+  def resetUserZone(m, params)
+    s = resetZone(m, m.sourcenick)
+    return
   end
 
-  def setAdminZone( m, params )
+  def setAdminZone(m, params)
     if params[:who] and params[:where].size > 0
-      s = setZone( m, params[:who], params[:where].join('_') )
+      setZone(m, params[:who], params[:where].join('_'))
+      # s = setZone(m, params[:who], params[:where].join('_'))
     else
       m.reply "Requires a nick and the <Continent>/<City> or country code"
     end
   end
 
-  def resetAdminZone( m, params )
+  def resetAdminZone(m, params)
     if params[:who]
-      s = resetZone( m, params[:who])
+      # s = resetZone(m, params[:who])
+      resetZone(m, params[:who])
     else
       m.reply "Requires a nick"
     end
   end
 
-  def setZone( m, user, zone )
+  def setZone(m, user, zone)
     begin
-      getTime( m,  zone )
+      getTime(m, zone)
     rescue TZInfo::InvalidTimezoneIdentifier
       m.reply "#{zone} is an invalid time zone. Format is <Continent>/<City> or a two character country code."
       return
@@ -142,7 +146,7 @@ class TimePlugin < Plugin
     m.reply "Ok, I'll remember that #{user} is on the #{zone} time zone"
   end
 
-  def resetZone( m, user )
+  def resetZone(m, user)
     @registry.delete(user)
     m.reply "Ok, I've forgotten #{user}'s time zone"
   end

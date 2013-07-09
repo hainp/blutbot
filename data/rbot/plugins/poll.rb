@@ -119,7 +119,6 @@ class PollPlugin < Plugin
     init_reg_entry :archives, Hash.new
     init_reg_entry :last_poll_id, 0
     running = @registry[:running]
-    now = Time.now
     running.each do |id, poll|
       duration = poll.ends_at - Time.now
       if duration > 0
@@ -144,7 +143,9 @@ class PollPlugin < Plugin
 
   def start(m, params)
     author = m.sourcenick
-    chan = m.channel
+    # chan = m.channel
+    @author = author
+    @channel = m.channel
 
     max_concurrent = @bot.config['poll.max_concurrent_polls']
     if authors_running_count(author) == max_concurrent

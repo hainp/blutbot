@@ -222,7 +222,8 @@ class UrlPlugin < Plugin
   end
 
   def info(m, params)
-    escaped = URI.escape(params[:urls].to_s, OUR_UNSAFE)
+    escaped = CGI.escape(params[:urls].to_s, OUR_UNSAFE)
+    # escaped = URI.escape(params[:urls].to_s, OUR_UNSAFE)
     urls = URI.extract(escaped)
     Thread.new do
       handle_urls(m,

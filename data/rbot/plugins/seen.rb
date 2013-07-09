@@ -160,7 +160,7 @@ class SeenPlugin < Plugin
       format = :normal
     end
 
-    nick = saw.nick
+    # nick = saw.nick
     ago = Time.new - saw.time
 
     if (ago.to_i == 0)

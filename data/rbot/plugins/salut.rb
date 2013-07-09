@@ -207,7 +207,7 @@ class SalutPlugin < Plugin
     return if @salutations.empty?
     return unless @changed
     @salutations.each { |lang, val|
-      l = lang.to_s
+      # l = lang.to_s
       save_lang(lang, val)
     }
     @changed = false

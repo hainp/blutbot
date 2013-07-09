@@ -561,7 +561,7 @@ class AzGamePlugin < Plugin
         p = @bot.httputil.get(rules[:url] % CGI.escape(random))
         debug p
         lemmi = Array.new
-        good = rules[:good]
+        # good = rules[:good]
         # We look for a lemma composed by a single word and of length at least two
         p.scan(/<span class="(?:hwd|srch)">(.*?)<\/span>([^\n]+?)<span class="psa">#{rules[:good]}<\/span>/i) { |prelemma, discard|
           lemma = prelemma.downcase
