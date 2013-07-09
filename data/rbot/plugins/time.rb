@@ -113,7 +113,8 @@ class TimePlugin < Plugin
   end
 
   def resetUserZone(m, params)
-    s = resetZone(m, m.sourcenick)
+    # s = resetZone(m, m.sourcenick)
+    resetZone(m, m.sourcenick)
     return
   end
 
