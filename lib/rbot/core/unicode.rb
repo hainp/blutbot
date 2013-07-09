@@ -66,14 +66,12 @@ class UnicodePlugin < CoreBotModule
 
     def initialize(*a)
         super
-        @@old_kcode = $KCODE
         self.class.reconfigure_filter(@bot)
     end
 
     def cleanup
         debug "cleaning up encodings"
         @bot.socket.filter = nil
-        $KCODE = @@old_kcode
         super
     end
 
@@ -82,7 +80,6 @@ class UnicodePlugin < CoreBotModule
         enable = bot.config['encoding.enable']
         if not enable
             bot.socket.filter = nil
-            $KCODE = @@old_kcode
             return
         end
         charsets = bot.config['encoding.charsets']
