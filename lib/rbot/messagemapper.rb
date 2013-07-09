@@ -568,7 +568,8 @@ class Bot
           sub = Regexp.escape(has_req.to_s) rescue "\\S+"
         end
         debug "Regexp for #{name}: #{sub.inspect}"
-        s = "#{not_needed ? "(?:" : ""}#{whites}(#{sub})#{ not_needed ? ")?" : ""}"
+        # s = "#{not_needed ? "(?:" : ""}#{whites}(#{sub})#{ not_needed ? ")?" : ""}"
+        _ = "#{not_needed ? "(?:" : ""}#{whites}(#{sub})#{ not_needed ? ")?" : ""}"
       }
       # debug "Replaced dyns: #{rx.inspect}"
       rx.gsub!(/((?:\\ )*)((?:\\\[)+)/, '\2\1')
