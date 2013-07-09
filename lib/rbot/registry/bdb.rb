@@ -81,13 +81,13 @@ module Irc
 
     def DBHash.create_db(name)
       debug "DBHash: creating empty db #{name}"
-      return BDB::Hash.open(name, nil,
-      BDB::CREATE | BDB::EXCL, 0600)
+      return BDB::Hash.open(name, RBOT_DB_NAME,
+                            BDB::CREATE | BDB::EXCL, 0600)
     end
 
     def DBHash.open_db(name)
       debug "DBHash: opening existing db #{name}"
-      return BDB::Hash.open(name, nil, "r+", 0600)
+      return BDB::Hash.open(name, RBOT_DB_NAME, "r+", 0600)
     end
 
   end
@@ -112,7 +112,6 @@ module Irc
           debug "DBTree: failed to open environment: #{e.pretty_inspect}. Retrying ..."
           @@env = BDB::Env.open(@bot.botclass, BDB::INIT_TRANSACTION | BDB::CREATE |  BDB::RECOVER)
         end
-        #@@env = BDB::Env.open(@bot.botclass, BDB::CREATE | BDB::INIT_MPOOL | BDB::RECOVER)
       end
 
       relfilename = @bot.path key
@@ -144,9 +143,7 @@ module Irc
 
     def DBTree.open_db(name)
       debug "DBTree: opening existing db #{name}"
-      STDERR.puts ">>> Opening #{name}, #{RBOT_DB_NAME}"
-      #return @@env.open_db(BDB::CIBtree, name, RBOT_DB_NAME, "r+", 0600)
-      return @@env.open_db(BDB::CIBtree, name, RBOT_DB_NAME, "a+", 0600)
+      return @@env.open_db(BDB::CIBtree, name, RBOT_DB_NAME, "r+", 0600)
     end
 
     def DBTree.cleanup_logs()
