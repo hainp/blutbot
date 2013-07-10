@@ -2,7 +2,9 @@ My own (cmpitg) notes.
 
 ## Requirements
 
-* Gems: `gettext`, `htmlentities`
+* Ruby **1.9** (haven't tested with Ruby 2.0).
+
+* Gems: `gettext`, `htmlentities`, `soap4r-spox`, `mechanize`, `nokogiri`, `string-irc`.
 
 ### For Tokyo Cabinet
 

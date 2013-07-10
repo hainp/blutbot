@@ -25,9 +25,11 @@ class MathPlugin < Plugin
   def name
     "math"
   end
+
   def help(plugin, topic="")
     "math <expression>, evaluate mathematical expression"
   end
+
   def privmsg(m)
     unless(m.params)
       m.reply "incorrect usage: " + help(m.plugin)
@@ -128,6 +130,7 @@ class MathPlugin < Plugin
     end
   end
 end
+
 plugin = MathPlugin.new
 plugin.register("math")
 plugin.register("maths")

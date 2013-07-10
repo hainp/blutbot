@@ -205,7 +205,9 @@ class GoogleTranslator < Translator
   def do_translate(text, from, to)
     langpair = [from == 'auto' ? '' : from, to].map { |e| e.tr('_', '-') }.join("|")
     raw_json = Irc::Utils.bot.httputil.get_response(URI.escape(
-               "http://ajax.googleapis.com/ajax/services/language/translate?v=1.0&q=#{text}&langpair=#{langpair}")).body
+      "https://www.googleapis.com/language/translate/v2q=#{text}&source=#{from}&target=#{to}"))
+    # raw_json = Irc::Utils.bot.httputil.get_response(URI.escape(
+    #            "http://ajax.googleapis.com/ajax/services/language/translate?v=1.0&q=#{text}&langpair=#{langpair}")).body
     response = JSON.parse(raw_json)
 
     if response["responseStatus"] != 200
