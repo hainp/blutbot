@@ -18,23 +18,9 @@
 # This module defines the fundamental building blocks for IRC
 #
 # Author:: Giuseppe Bilotta (giuseppe.bilotta@gmail.com)
+#
 
 require 'singleton'
-
-# The following monkeypatch is to fix a bug in Singleton where marshaling would
-# fail when trying to restore a marshaled Singleton due to _load being declared
-# private.
-if RUBY_VERSION < '1.9'
-module ::Singleton
-  public :_dump
-end
-
-class << Singleton
-  module SingletonClassMethods
-    public :_load
-  end
-end
-end
 
 class Object
 
