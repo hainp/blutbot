@@ -23,7 +23,6 @@
 require 'singleton'
 
 class Object
-
   # We extend the Object class with a method that
   # checks if the receiver is nil or empty
   def nil_or_empty?
@@ -41,8 +40,6 @@ end
 # in the same namespace
 #
 module Irc
-
-
   # Due to its Scandinavian origins, IRC has strange case mappings, which
   # consider the characters <tt>{}|^</tt> as the uppercase
   # equivalents of # <tt>[]\~</tt>.
