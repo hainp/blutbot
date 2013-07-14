@@ -48,27 +48,22 @@ class IssuePlugin < Plugin
   def help(plugin, topic="")
     case topic
     when ""
-      return _("""issue <command> [<tagnames>] <issue> => getting info about (an) issue(s) on Github. Valid <command>: `title`, `status`, `stats`, `labels`, `url`. Valid `url` must include `http` or `https`. If <command> is omitted, it's `status` by default. <issue> takes the form of `url` or `[organization] <project> <number>`, where <number> should be prefixed (but not necessary) with a `#`. Say `help issue <command>` for more info.""")
+      return _("""issue <command> [<tagnames>] <issue> => getting info about (an) issue(s) on Github.
+<command> is `stats`, `open`, `close`.
+<issue> is an url or `[organization] <project> <number>`. Say `help issue <command>` for more info.""")
 
     when "status"
-      return _("""issue status <issue> => getting title, participants, labels,
-and open/closed status of an issue. Shorten form of this command:
-istatus <issue>""")
-
-    when "title"
-      return _("""issue title <issue> => getting title of an issue.""")
+      return _("""issue status <issue> => getting title, participants, labels, and open/closed status of an issue.
+Shorten form: istatus <issue>""")
 
     when "stats", "statistics"
-      return _("""issue stats|statistics <issue> => getting number of open
-(with urgent) and closed issues.""")
+      return _("""issue stats|statistics <issue> => list all open (with urgent) and closed issues.""")
 
-    when "labels"
-      return _("""issue labels <tagname> <issue> => getting a list of open and
-closed issues with their numbers and title matching tagname(s).  Multiple labels
-are separated by a vertical bar '|'.""")
+    when "open"
+      return _("""issue open <issue> => list all open issues with their URLs.""")
 
-    when "url"
-      return _("issue url <issue> => getting the full URL to the issue.")
+    when "closed"
+      return _("""issue closed <issue> => list all closed issues with their URLs.""")
 
     else
       return _("invalid topic, try: help issue")
