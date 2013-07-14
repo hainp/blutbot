@@ -5,10 +5,13 @@
 #
 # Author:: Tom Gilbert (giblet) <tom@linuxbrit.co.uk>
 # Author:: Giuseppe "Oblomov" Bilotta <giuseppe.bilotta@gmail.com>
+# Author:: Duong H. Nguyen (cmpitg) <cmpitg@gmail.com>
 #
 # Copyright:: (C) 2002-2005 Tom Gilbert
 # Copyright:: (C) 2006 Tom Gilbert, Giuseppe Bilotta
 # Copyright:: (C) 2006-2007 Giuseppe Bilotta
+# Copyright:: (C) 2013 Duong H. Nguyen (@cmpitg)
+#
 
 # TODO:: use lr=lang_<code> or whatever is most appropriate to let google know
 #        it shouldn't use the bot's location to find the preferred language
