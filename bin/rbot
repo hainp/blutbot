@@ -66,15 +66,15 @@ opts = GetoptLong.new(
 $debug = $DEBUG
 $daemonize = false
 
-opts.each {|opt, arg|
+opts.each do |opt, arg|
   $debug = true if(opt == "--debug")
   $daemonize = true if(opt == "--background")
   $opts[opt.sub(/^-+/, "")] = arg
-}
+end
 
 $cl_loglevel = $opts["loglevel"].to_i if $opts["loglevel"]
 
-if ($opts["trace"])
+if $opts["trace"]
   set_trace_func proc { |event, file, line, id, binding, classname|
     if classname.to_s == $opts["trace"]
       printf "TRACE: %8s %s:%-2d %10s %8s\n", event, File.basename(file), line, id, classname
@@ -98,12 +98,12 @@ rescue LoadError => e
   exit 2
 end
 
-if ($opts["version"])
+if $opts["version"]
   puts "rbot #{$version}"
   exit 0
 end
 
-if ($opts["help"])
+if $opts["help"]
   puts "usage: rbot [options] [config directory]"
   puts "  -h, --help         this message"
   puts "  -v, --version      version information"
@@ -115,7 +115,7 @@ if ($opts["help"])
   exit 0
 end
 
-if(bot = Irc::Bot.new(ARGV.shift, :argv => orig_opts))
+if bot = Irc::Bot.new(ARGV.shift, :argv => orig_opts)
   # just run the bot
   bot.mainloop
 end
