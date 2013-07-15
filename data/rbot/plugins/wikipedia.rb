@@ -15,36 +15,74 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-class Wikipedia < Plugin
-  def name; "My plugin"; end
+require 'wikipedia'
+require 'string-irc'
+require 'cgi'
 
+class WikipediaPlugin < Plugin
   def help(plugin, topic="")
     case topic
-    when "general"
-      return _("Specific message")
-
-    when "specific"
-      return _("Specific message")
+    when ""
+      return _("""wiki *words => search en.wikipedia""")
+    else
+      return _("invalid help topic, try `help wiki`")
     end
-
-    return _("Default message")
   end
 
-  def method_to_call(m, params)
-    # `m.reply` to reply
-    # `m.sourcenick` = the sender
-    # `@bot.nick` = nickname of the bot
-    # `@bot.say sendee, message` = private message to sendee
-    # `params` is a dictionary
+  def self.get_paragraph(content, num=1)
+    # content.lines
+    #        .drop_while{ |line|
+    #          line.start_with? '{{' \
+    #          or line.start_with? '[[' \
+    #          or line.strip.length == 0
+    #        }
+    #        .take(num).join("\n")
+    content.split("\n\n").drop(1).take(num).join("\n")
+  end
+
+  def self.to_irc_bold(s)
+  end
+
+  def self.ircify(s)
+    s.gsub(/'''''([^']*)'''''/, "\x02" + '\1' + "\x0f")
+     .gsub(/'''([^']*)'''/, "\x02" + '\1' + "\x0f")
+     .gsub(/''([^']*)''/, "\x02" + '\1' + "\x0f")
+     .gsub(/\[\[([^\]]*)\]\]/, '\1')
+  end
+
+  def self.get_disamb(content)
+    WikipediaPlugin.get_paragraph(content) + content.split("\n\n")[1]
+  end
+
+  def reply_lines(m, text)
+    text.lines do |line|
+      m.reply line
+      sleep 0.1
+    end
+  end
+
+  def wiki(m, params)
+    if params[:words].length == 0
+      m.reply 'no keywords to search for'
+      return
+    end
+
+    keyword = params[:words].join(' ')
+    content = Wikipedia.find(keyword).content
+    result = if not content
+      "article not found"
+    elsif content.end_with? '{{disambig}}'
+      WikipediaPlugin.get_disamb content
+    else
+      WikipediaPlugin.get_paragraph content
+    end
+
+    m.reply "http://en.wikipedia.org/wiki/#{CGI.escape keyword}"
+    reply_lines m, WikipediaPlugin.ircify(result)
+    m.reply '--- EOM ---'
   end
 end
 
-plugin = YourPlugin.new
+plugin = WikipediaPlugin.new
 
-plugin.map 'command :param [:optional_param]',
-           :action => :method_to_call,
-           :default => { :optional_param => "value" },
-           :requirements => { :param => /who|what|where/ }
-
-plugin.map 'command type2 *words',
-           :action => :method_to_call
+plugin.map "wiki *words", :action => :wiki, :thread => true
