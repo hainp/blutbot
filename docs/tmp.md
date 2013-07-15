@@ -25,8 +25,8 @@ Header:
 
       def help(plugin, topic="")
         case topic
-        when "general"
-          return _("Specific message")
+        when ""
+          return _("General message")
 
         when "specific"
           return _("Specific message")

@@ -389,6 +389,7 @@ module Plugins
     end
   end
 
+  #
   # A Plugin is a BotModule that provides additional functionality.
   #
   # A user-defined plugin should subclass this, and then define any of the
