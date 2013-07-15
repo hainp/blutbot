@@ -457,17 +457,6 @@ class SearchPlugin < Plugin
     m.reply answer_type[n] + sep + answer[n]
   end
 
-  def wikipedia(m, params)
-    lang = params[:lang]
-    site = "#{lang.nil? ? '' : lang + '.'}wikipedia.org"
-    debug "Looking up things on #{site}"
-    params[:site] = site
-    params[:filter] = / - Wikipedia.*$/
-    params[:hits] = @bot.config['wikipedia.hits']
-    params[:firstpar] = @bot.config['wikipedia.first_par']
-    return google(m, params)
-  end
-
   def unpedia(m, params)
     site = "uncyclopedia.org"
     debug "Looking up things on #{site}"
@@ -516,6 +505,4 @@ plugin.map "gcalc *words", :action => 'gcalc', :threaded => true
 plugin.map "gdef *words", :action => 'gdef', :threaded => true
 plugin.map "gtime *words", :action => 'gtime', :threaded => true
 plugin.map "wa *words", :action => 'wolfram', :threaded => true
-# plugin.map "wiki :lang *words", :action => 'wikipedia', :requirements => { :lang => /^\w\w\w?$/ }, :threaded => true
-# plugin.map "wiki *words", :action => 'wikipedia', :threaded => true
 plugin.map "unpedia *words", :action => 'unpedia', :threaded => true
