@@ -222,7 +222,7 @@ class SearchPlugin < Plugin
       wml = @bot.httputil.get(url)
       raise unless wml
     rescue
-      m.reply "error search for #{what}"
+      m.reply "error searching for #{what}"
       return
     end
     results = wml.scan(GOOGLE_WAP_LINK)
