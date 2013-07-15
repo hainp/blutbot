@@ -1,4 +1,3 @@
-#-- vim:sw=2:et
 #++
 #
 # :title: rbot plugin management
@@ -6,13 +5,14 @@
 require 'singleton'
 
 module Irc
-class Bot
+  class Bot
     Config.register Config::ArrayValue.new('plugins.blacklist',
       :default => [], :wizard => false, :requires_rescan => true,
       :desc => "Plugins that should not be loaded")
     Config.register Config::ArrayValue.new('plugins.whitelist',
       :default => [], :wizard => false, :requires_rescan => true,
       :desc => "Only whitelisted plugins will be loaded unless the list is empty")
+
 module Plugins
   require 'rbot/messagemapper'
 
