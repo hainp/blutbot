@@ -723,6 +723,7 @@ module ::Irc
       idx = 0
       msg = opts[:message]
       retval = Array.new
+
       while count > 0 and urls.length > 0
         url = urls.shift
         idx += 1

@@ -274,7 +274,7 @@ class SearchPlugin < Plugin
       return
     end
 
-    result_string = pretty.join(" | ")
+    result_string = pretty.join("\n")
 
     # If we return a single, full result, change the output to a more compact representation
     if single

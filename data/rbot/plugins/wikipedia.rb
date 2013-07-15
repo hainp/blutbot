@@ -30,13 +30,6 @@ class WikipediaPlugin < Plugin
   end
 
   def self.get_paragraph(content, num=1)
-    # content.lines
-    #        .drop_while{ |line|
-    #          line.start_with? '{{' \
-    #          or line.start_with? '[[' \
-    #          or line.strip.length == 0
-    #        }
-    #        .take(num).join("\n")
     content.split("\n\n").drop(1).take(num).join("\n")
   end
 
@@ -44,10 +37,13 @@ class WikipediaPlugin < Plugin
   end
 
   def self.ircify(s)
-    s.gsub(/'''''([^']*)'''''/, "\x02" + '\1' + "\x0f")
-     .gsub(/'''([^']*)'''/, "\x02" + '\1' + "\x0f")
-     .gsub(/''([^']*)''/, "\x02" + '\1' + "\x0f")
-     .gsub(/\[\[([^\]]*)\]\]/, '\1')
+    s.gsub(/'''''([^']*?)'''''/, "\x02" + '\1' + "\x0f")
+     .gsub(/'''([^']*?)'''/, "\x02" + '\1' + "\x0f")
+     .gsub(/''([^']*?)''/, "\x02" + '\1' + "\x0f")
+     .gsub(/\[\[([^\]]*?)\]\]/, '\1')
+     .gsub(/\({{[^}]*?}}\)/, '')
+     .gsub(/{{[^}]*?}}/, '')
+     .gsub(/<ref[^>]*?>.*?<\/ref>/, '')
   end
 
   def self.get_disamb(content)
