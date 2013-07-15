@@ -252,11 +252,13 @@ class SearchPlugin < Plugin
           u = CGI::parse(u)['q'].first
         end
         urls.push(u)
+
         pretty.push("%{n}%{b}%{t}%{b}%{sep}%{u}" % {
           :n => (single ? "" : "#{urls.length}. "),
           :sep => (single ? " -- " : ": "),
           :b => Bold, :t => t, :u => u
         })
+        
         break if urls.length == hits
       end
     rescue => e

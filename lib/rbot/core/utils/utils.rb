@@ -742,7 +742,8 @@ module ::Irc
           next
         end
       end
-      return retval
+      
+      retval
     end
 
     # Returns a comma separated list except for the last element
