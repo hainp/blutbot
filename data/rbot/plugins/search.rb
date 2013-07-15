@@ -258,7 +258,7 @@ class SearchPlugin < Plugin
           :sep => (single ? " -- " : ": "),
           :b => Bold, :t => t, :u => u
         })
-        
+
         break if urls.length == hits
       end
     rescue => e
@@ -282,11 +282,10 @@ class SearchPlugin < Plugin
       return
     end
 
-    m.reply "Results for #{what}: #{result_string}", :split_at => /\s+\|\s+/
+    m.reply "Results for #{what}: \n#{result_string}"
 
-    return unless first_pars > 0
-
-    Utils.get_first_pars urls, first_pars, :message => m
+    Utils.get_first_pars(urls, first_pars, :message => m) unless first_pars > 0
+    m.reply "--- EOM ---"
   end
 
   def google_define(m, what, params)
