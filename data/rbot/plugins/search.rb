@@ -221,8 +221,8 @@ class SearchPlugin < Plugin
     begin
       wml = @bot.httputil.get(url)
       raise unless wml
-    rescue => e
-      m.reply "error googling for #{what}"
+    rescue
+      m.reply "error search for #{what}"
       return
     end
     results = wml.scan(GOOGLE_WAP_LINK)
@@ -285,7 +285,6 @@ class SearchPlugin < Plugin
     return unless first_pars > 0
 
     Utils.get_first_pars urls, first_pars, :message => m
-
   end
 
   def google_define(m, what, params)
