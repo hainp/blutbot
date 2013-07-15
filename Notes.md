@@ -4,7 +4,7 @@ My own (cmpitg) notes.
 
 * Ruby **1.9** (haven't tested with Ruby 2.0).
 
-* Gems: `gettext`, `htmlentities`, `soap4r-spox`, `mechanize`, `nokogiri`, `string-irc`.
+* Gems: `gettext`, `htmlentities`, `soap4r-spox`, `mechanize`, `nokogiri`, `string-irc`, `wikipedia-client`.
 
 ### For Tokyo Cabinet
 
