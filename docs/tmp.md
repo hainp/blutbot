@@ -21,8 +21,6 @@ Header:
 
     ```ruby
     class YourPlugin < Plugin
-      def name; "My plugin"; end
-
       def help(plugin, topic="")
         case topic
         when ""
