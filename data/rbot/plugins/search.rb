@@ -232,7 +232,7 @@ class SearchPlugin < Plugin
       return
     end
 
-    single ||= (results.length==1)
+    single ||= (results.length == 1)
     pretty = []
 
     begin
