@@ -1032,10 +1032,12 @@ class Bot
       rescue SystemExit
         log_session_end
         exit 0
+
       rescue Errno::ETIMEDOUT, Errno::ECONNABORTED, TimeoutError, SocketError => e
         error "network exception: #{e.pretty_inspect}"
         quit_msg = e.to_s
         too_fast += 10 if valid_recv
+
       rescue ServerMessageParseError => e
         # if the bot tried reconnecting too often, we can get forcefully
         # disconnected by the server, while still receiving an empty message
@@ -1048,6 +1050,7 @@ class Bot
         end
         quit_msg = "Unparseable Server Message: #{e.message.inspect}"
         retry
+
       rescue ServerError => e
         quit_msg = "server ERROR: " + e.message
         debug quit_msg
@@ -1069,6 +1072,7 @@ class Bot
           log "Killed by server, extra delay multiplier #{oldtf} -> #{too_fast}"
         end
         retry
+
       rescue DBFatal => e
         fatal "fatal db error: #{e.pretty_inspect}"
         DBTree.stats
@@ -1076,9 +1080,11 @@ class Bot
         # restart("Oops, we seem to have registry problems ...")
         log_session_end
         exit 2
+
       rescue Exception => e
         error "non-net exception: #{e.pretty_inspect}"
         quit_msg = e.to_s
+        
       rescue => e
         fatal "unexpected exception: #{e.pretty_inspect}"
         log_session_end

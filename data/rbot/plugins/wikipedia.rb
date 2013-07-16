@@ -77,8 +77,18 @@ class WikipediaPlugin < Plugin
     reply_lines m, WikipediaPlugin.ircify(result)
     m.reply '--- EOM ---'
   end
+
+  def wiki_stats(m, params)
+    if params[:words].length == 0
+      m.reply 'no keywords to search for'
+      return
+    end
+  end
 end
 
 plugin = WikipediaPlugin.new
 
-plugin.map "wiki *words", :action => :wiki, :thread => true
+plugin.map "wiki *words",                :action => :wiki, :thread => true
+
+plugin.map "wiki-stats :command *words", :action => :wiki_stats,
+           :thread => true
