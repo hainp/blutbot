@@ -150,11 +150,13 @@ require 'rbot/language'
 
 module Irc
 
+  ##
   # Main bot class, which manages the various components, receives messages,
   # handles them or passes them to plugins, and contains core functionality.
   class Bot
-    COPYRIGHT_NOTICE = "(c) Tom Gilbert and the rbot development team"
-    SOURCE_URL = "http://ruby-rbot.org"
+    COPYRIGHT_NOTICE = "(c) Tom Gilbert, Duong H. Nguyen and the rbot development team"
+    SOURCE_URL = "http://github.com/cmpitg/blutbot"
+
     # the bot's Auth data
     attr_reader :auth
 
@@ -197,7 +199,7 @@ module Irc
       @client.server
     end
 
-    # bot User in the client/server connection
+    # bot user in the client/server connection
     # TODO multiserver
     def myself
       @client.user
