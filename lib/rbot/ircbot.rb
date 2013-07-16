@@ -1,6 +1,6 @@
 #++
 #
-# :title: rbot core
+# :title: blutbot core
 
 require 'thread'
 
@@ -26,6 +26,7 @@ unless Kernel.respond_to? :pretty_inspect
   def pretty_inspect
     PP.pp(self, '')
   end
+
   public :pretty_inspect
 end
 
@@ -46,25 +47,30 @@ end
 def rawlog(level, message=nil, who_pos=1)
   call_stack = caller
   if call_stack.length > who_pos
-    who = call_stack[who_pos].sub(%r{(?:.+)/([^/]+):(\d+)(:in .*)?}) { "#{$1}:#{$2}#{$3}" }
+    who = call_stack[who_pos].sub(%r{(?:.+)/([^/]+):(\d+)(:in .*)?}) {
+      "#{$1}:#{$2}#{$3}"
+    }
   else
     who = "(unknown)"
   end
+
   # Output each line. To distinguish between separate messages and multi-line
   # messages originating at the same time, we blank #{who} after the first message
   # is output.
   # Also, we output strings as-is but for other objects we use pretty_inspect
-  case message
+  str = case message
   when String
-    str = message
+    message
   else
-    str = message.pretty_inspect
+    message.pretty_inspect
   end
+
   qmsg = Array.new
-  str.each_line { |l|
+  str.each_line do |l|
     qmsg.push [level, l.chomp, who]
     who = ' ' * who.size
-  }
+  end
+
   $log_queue.push qmsg
 end
 
