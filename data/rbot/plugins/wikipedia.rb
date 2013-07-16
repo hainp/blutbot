@@ -19,15 +19,18 @@ require 'wikipedia'
 require 'string-irc'
 require 'cgi'
 
+# Maximum number of results
+MAX_N_RESULTS = 15
+
 class WikipediaPlugin < Plugin
   def help(plugin, topic="")
     case topic
     when ""
-      return _("wiki *words => search en.wikipedia" + "\n"
-               + "wiki-stats <info> *words => get stats from a wiki page."
-               + "<info> is one of: title, categories, links, extlinks, "
-               + "images, image_url, image_descriptionurl, image_urls, "
-               + "image_descriptionurls, coordinates.")
+      return _("wiki *words => search en.wikipedia" + "\n" +
+               "wiki-stats <info> *words => get stats from a wiki page." +
+               "<info> is one of: title, categories, links, extlinks, " +
+               "images, image-url, image-descriptionurl, image-urls, " +
+               "image-descriptionurls, coordinates.")
     else
       return _("invalid help topic, try `help wiki`")
     end
