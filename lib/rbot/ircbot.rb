@@ -46,12 +46,13 @@ end
 
 def rawlog(level, message=nil, who_pos=1)
   call_stack = caller
-  if call_stack.length > who_pos
-    who = call_stack[who_pos].sub(%r{(?:.+)/([^/]+):(\d+)(:in .*)?}) {
+
+  who = if call_stack.length > who_pos
+    call_stack[who_pos].sub(%r{(?:.+)/([^/]+):(\d+)(:in .*)?}) {
       "#{$1}:#{$2}#{$3}"
     }
   else
-    who = "(unknown)"
+    "(unknown)"
   end
 
   # Output each line. To distinguish between separate messages and multi-line
