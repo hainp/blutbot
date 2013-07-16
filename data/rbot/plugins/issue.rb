@@ -182,12 +182,7 @@ end
 
 plugin = IssuePlugin.new
 
-# plugin.map "issue labels :labels *issue",
-           # :action => :reply_labels,                            :thread => true
 plugin.map "issue :command *issue",
            :action => :process_command,
            :thread => true
-# plugin.map "issue title *issue",      :action => :reply_title,  :thread => true
-# plugin.map "issue stats *issue",      :action => :reply_stats,  :thread => true
-# plugin.map "issue statistics *issue", :action => :reply_stats,  :thread => true
-# plugin.map "issue url *issue",        :action => :reply_url,    :thread => true
+
