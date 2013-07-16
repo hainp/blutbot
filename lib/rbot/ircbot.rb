@@ -234,18 +234,17 @@ module Irc
     # TODO multiserver
     def inspect
       ret = self.to_s[0..-2]
-      ret << ' version=' << $version.inspect
-      ret << ' botclass=' << botclass.inspect
+      ret << " version=#{$version.inspect}"
+      ret << " botclass=#{botclass.inspect}"
       ret << ' lang="' << lang.language
-      if defined?(GetText)
-        ret << '/' << locale
-      end
+      (ret << '/' << locale) if defined?(GetText)
       ret << '"'
-      ret << ' nick=' << nick.inspect
-      ret << ' server='
+      ret << " nick=#{nick.inspect}"
+
+      ret << " server="
       if server
         ret << (server.to_s + (socket ?
-          ' [' << socket.server_uri.to_s << ']' : '')).inspect
+          " [#{socket.server_uri.to_s}]" : "")).inspect
         unless server.channels.empty?
           ret << " channels="
           ret << server.channels.map { |c|
@@ -257,7 +256,8 @@ module Irc
       else
         ret << '(none)'
       end
-      ret << ' plugins=' << plugins.inspect
+
+      ret << " plugins=#{plugins.inspect}"
       ret << ">"
     end
 
