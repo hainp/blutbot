@@ -100,12 +100,12 @@ end
 restart_logger
 
 def log_session_start
-  $logger << "\n\n=== #{botclass} session started on #{Time.now.strftime($dateformat)} ===\n\n"
+  $logger << "\n\n--- #{botclass} session started on #{Time.now.strftime($dateformat)} ---\n\n"
   restart_logger
 end
 
 def log_session_end
-  $logger << "\n\n=== #{botclass} session ended on #{Time.now.strftime($dateformat)} ===\n\n"
+  $logger << "\n\n--- #{botclass} session ended on #{Time.now.strftime($dateformat)} ---\n\n"
   $log_queue << nil
 end
 
