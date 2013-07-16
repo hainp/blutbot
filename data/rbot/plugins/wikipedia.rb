@@ -30,10 +30,11 @@ class WikipediaPlugin < Plugin
   end
 
   def self.get_paragraph(content, num=1)
-    content.split("\n\n").drop(1).take(num).join("\n")
-  end
-
-  def self.to_irc_bold(s)
+    content.split("\n\n")
+           .select {
+             |line| not (line.start_with? "{{" or line.start_with? "[[")
+           }
+           .take(num).join('\n')
   end
 
   def self.ircify(s)
@@ -43,7 +44,7 @@ class WikipediaPlugin < Plugin
      .gsub(/\[\[([^\]]*?)\]\]/, '\1')
      .gsub(/\({{[^}]*?}}\)/, '')
      .gsub(/{{[^}]*?}}/, '')
-     .gsub(/<ref[^>]*?>.*?<\/ref>/, '')
+     .gsub(/<ref[^>]*?>\s*?.*?\s*?<\/ref>/, '')
   end
 
   def self.get_disamb(content)
