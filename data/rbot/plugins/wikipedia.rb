@@ -91,12 +91,35 @@ class WikipediaPlugin < Plugin
       m.reply 'no keywords to search for'
       return
     end
+
+    command = params[:command].gsub("-", "_").to_sym
+    keyword = params[:words].join(' ')
+
+    page = Wikipedia.find keyword
+    info = page.send(command)
+    result = ""
+
+    if info.respond_to?(:take)
+      info = info.take(MAX_N_RESULTS).each_with_index do |line, index|
+        result << "#{index + 1}) #{line}\n"
+      end
+    else
+      result = info
+    end
+
+    m.reply "http://en.wikipedia.org/wiki/#{CGI.escape keyword}"
+    reply_lines m, result
+    m.reply '--- EOM ---'
   end
 end
 
 plugin = WikipediaPlugin.new
 
-plugin.map "wiki *words",                :action => :wiki, :thread => true
+plugin.map "wiki *words", :action => :wiki, :thread => true
 
-plugin.map "wiki-stats :command *words", :action => :wiki_stats,
+plugin.map "wiki-stats :command *words",
+           :requirements => {
+             :command => /title|categories|links|extlinks||images|image-url|image-descriptionurl|image-urls|image-descriptionurls|coordinates/
+           },
+           :action => :wiki_stats,
            :thread => true
