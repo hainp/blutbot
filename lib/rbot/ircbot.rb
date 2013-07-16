@@ -230,7 +230,6 @@ module Irc
       end
     end
 
-
     # bot inspection
     # TODO multiserver
     def inspect
