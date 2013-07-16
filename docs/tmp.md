@@ -52,3 +52,15 @@ Header:
     plugin.map 'command type2 *words',
                :action => :method_to_call
     ```
+
+### Logging
+
+Each log level has an output function correspondingly:
+
+```ruby
+debug "debug test"
+log "log test"
+warning "warning test"
+error "error test"
+fatal "fatal test"
+```

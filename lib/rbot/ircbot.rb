@@ -130,12 +130,6 @@ def fatal(message=nil, who_pos=1)
   rawlog(Logger::Severity::FATAL, message, who_pos)
 end
 
-debug "debug test"
-log "log test"
-warning "warning test"
-error "error test"
-fatal "fatal test"
-
 # The following global is used for the improved signal handling.
 $interrupted = 0
 
