@@ -21,8 +21,8 @@ class SlapPlugin < Plugin
   def help(plugin, topic="")
     case topic
     when ""
-      return _("slap <nickname> => publicly slap a person\n" +
-               "pslap <nickname> => privately slap a person")
+      return _("slap <nickname> [<times>] => publicly slap a person\n" +
+               "pslap <nickname> [<times>] => privately slap a person")
     else
       return _("invalid help topic, try `help wiki`")
     end
@@ -42,7 +42,13 @@ class SlapPlugin < Plugin
       return
     end
 
-    m.reply("#{params[:nick]} is #{SlapPlugin.slap_text} by the admin!")
+    times = params[:times] || 0
+
+    if times == 0
+      m.reply("#{params[:nick]} is #{SlapPlugin.slap_text}!")
+    else
+      m.reply("#{params[:nick]} is #{SlapPlugin.slap_text} #{times} times!")
+    end
   end
 
   def pslap(m, params)
@@ -51,11 +57,17 @@ class SlapPlugin < Plugin
       return
     end
 
-    @bot.say(params[:nick], "You are #{SlapPlugin.slap_text} by the admin!")
+    times = params[:times] || 0
+
+    if times == 0
+      @bot.say(params[:nick], "You are #{SlapPlugin.slap_text}!")
+    else
+      @bot.say(params[:nick], "You are #{SlapPlugin.slap_text} #{times} times!")
+    end
   end
 end
 
 plugin = SlapPlugin.new
 
-plugin.map "slap :nick", :action => :slap, :thread => true
-plugin.map "pslap :nick", :action => :pslap, :thread => true
+plugin.map "slap :nick [:times]", :action => :slap, :thread => true
+plugin.map "pslap :nick [:times]", :action => :pslap, :thread => true
