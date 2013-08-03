@@ -40,7 +40,7 @@ class WarnPlugin < Plugin
       return
     end
 
-    rule = params[:rule]
+    rule = params[:rule].join(' ').strip
 
     if rule.length == 0
       m.reply 'no rule is given'
@@ -76,5 +76,5 @@ class WarnPlugin < Plugin
 end
 plugin = WarnPlugin.new
 
-plugin.map "w :nick rule*", :action => :warn, :thread => true
+plugin.map "w :nick *rule", :action => :warn, :thread => true
 # plugin.map "pw :nick [:rule]", :action => :pwarn, :thread => true
