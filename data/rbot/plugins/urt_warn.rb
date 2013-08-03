@@ -76,5 +76,5 @@ class WarnPlugin < Plugin
 end
 plugin = WarnPlugin.new
 
-plugin.map "w :nick [:rule]", :action => :warn, :thread => true
+plugin.map "w :nick rule*", :action => :warn, :thread => true
 # plugin.map "pw :nick [:rule]", :action => :pwarn, :thread => true
