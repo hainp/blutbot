@@ -57,6 +57,25 @@ class WarnPlugin < Plugin
     
     m.reply("#{WarnPlugin.warn_text} #{params[:nick]}: #{text} !")      
   end
+
+  def rule(m, params)
+    rule = params[:rule]
+    
+    if rule.length == 0
+      m.reply 'no rule is given'
+      return
+    end
+
+    text = Rules[rule]
+
+    if !text
+      m.reply("#{WarnPlugin.bold_text} Not found!")
+      return
+    end
+
+    m.reply("#{WarnPlugin.bold_text} #{rule}: #{text}!")
+  end
+  
 end
 plugin = WarnPlugin.new
 
