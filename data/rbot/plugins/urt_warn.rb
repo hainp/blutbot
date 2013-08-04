@@ -51,15 +51,15 @@ class WarnPlugin < Plugin
     text = Rules[rule]
 
     if !text
-      m.reply("#{WarnPlugin.warn_text} #{params[:nick]}: #{rule} !")
+      m.reply("#{WarnPlugin.warn_text} #{params[:nick]}: #{rule}!")
       return
     end
     
-    m.reply("#{WarnPlugin.warn_text} #{params[:nick]}: #{text} !")      
+    m.reply("#{WarnPlugin.warn_text} #{params[:nick]}: #{text}!")      
   end
 
   def rule(m, params)
-    rule = params[:rule]
+    rule = params[:rule]   
     
     if rule.length == 0
       m.reply 'no rule is given'
@@ -69,11 +69,11 @@ class WarnPlugin < Plugin
     text = Rules[rule]
 
     if !text
-      m.reply("#{WarnPlugin.bold_text} Not found!")
+      m.reply("#{WarnPlugin.bold_text 'Not found!'}")
       return
     end
 
-    m.reply("#{WarnPlugin.bold_text} #{rule}: #{text}!")
+    m.reply("#{WarnPlugin.bold_text text}")
   end
   
 end
