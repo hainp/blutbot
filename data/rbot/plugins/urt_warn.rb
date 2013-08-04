@@ -19,8 +19,7 @@ class WarnPlugin < Plugin
   def help(plugin, topic="")
     case topic
     when ""
-      return _("w <nickname> [<rule>] => publicly warn a person\n" +
-               "pw <nickname> [<rule>] => privately warn a person")
+      return _("w <nickname> [<rule>] => warn a person\n")
     else
       return _("invalid help topic, try `help wiki`")
     end
@@ -56,25 +55,8 @@ class WarnPlugin < Plugin
     
     m.reply("#{WarnPlugin.warn_text} #{params[:nick]}: #{text} !")      
   end
-
-  # Not in use
-  def pwarn(m, params)
-    if params[:nick].length == 0
-      m.reply 'no nickname to warn'
-      return
-    end
-
-    rule = params[:rule]  
-
-    if rule.length == 0
-      m.reply 'no rule is given'
-      return
-    end
-   
-    @bot.say(params[:nick], "#{WarnPlugin.warn_text}: #{rule}!")
-  end
 end
 plugin = WarnPlugin.new
 
 plugin.map "w :nick *rule", :action => :warn, :thread => true
-# plugin.map "pw :nick [:rule]", :action => :pwarn, :thread => true
+
