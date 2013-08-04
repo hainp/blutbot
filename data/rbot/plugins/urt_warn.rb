@@ -69,7 +69,7 @@ class WarnPlugin < Plugin
     text = Rules[rule]
 
     if !text
-      m.reply("#{WarnPlugin.bold_text 'Not found!'}")
+      m.reply "rule not found"
       return
     end
 
