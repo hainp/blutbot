@@ -80,5 +80,5 @@ end
 plugin = WarnPlugin.new
 
 plugin.map "w :nick *rule", :action => :warn, :thread => true
-plugin.map "rule :rule", :action => :warn, :thread => true
-plugin.map "rules", :action => :warn, :thread => true
+plugin.map "rule :rule", :action => :rule, :thread => true
+plugin.map "rules", :action => :rules, :thread => true
