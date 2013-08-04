@@ -75,6 +75,10 @@ class WarnPlugin < Plugin
 
     m.reply("#{WarnPlugin.bold_text text}")
   end
+
+  def rules(m, params)
+    Rules.each {|rule| m.reply("#{rule[0]} #{rule[1]}")}
+  end
   
 end
 plugin = WarnPlugin.new
