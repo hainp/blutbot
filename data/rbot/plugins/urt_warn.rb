@@ -19,7 +19,9 @@ class WarnPlugin < Plugin
   def help(plugin, topic="")
     case topic
     when ""
-      return _("w <nickname> [<rule>] => warn a person\n")
+      return _("w <nickname> [<rule>] => warn a person\n" +
+               "rule [<rule>] => shout out a rule\n" +
+               "rules => shout out all rules")
     else
       return _("invalid help topic, try `help wiki`")
     end
@@ -59,4 +61,5 @@ end
 plugin = WarnPlugin.new
 
 plugin.map "w :nick *rule", :action => :warn, :thread => true
-
+plugin.map "rule :rule", :action => :warn, :thread => true
+plugin.map "rules", :action => :warn, :thread => true
